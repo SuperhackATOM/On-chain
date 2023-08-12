@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const infuraKey = process.env["INFURA_KEY"];
+const infuraKey = process.env["INFURA_API_KEY"];
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const privateKey = process.env.WALLET_PRIVATE_KEY;
 
@@ -17,20 +17,19 @@ module.exports = {
   contracts_directory: './contracts/optimism',
 
   networks: {
-    optimistic_ethereum: {
-      network_id: 17,
+    zora_goerli: {  // explorer: https://testnet.explorer.zora.energy
       provider: function () {
-        return new HDWalletProvider({
-          mnemonic: {
-            phrase: mnemonic
-          },
-          providerOrUrl: "http://127.0.0.1:8545/",
-          addressIndex: 0,
-          numberOfAddresses: 1,
-          chainId: 17
-        })
-      }
+        return new HDWalletProvider([privateKey], 'https://testnet.rpc.zora.energy')
+      },
+      network_id: 999,
     },
+    // true: {
+    //   network_id: 420,
+    //   chain_id: 420,
+    //   provider: function () {
+    //     return new HDWalletProvider(privateKey, "https://optimism-goerli.infura.io/v3/" + infuraKey);
+    //   }
+    // },
     optimistic_goerli: {
       network_id: 420,
       chain_id: 420,
@@ -50,7 +49,7 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "^0.8.19",
+      version: "0.8.9",
       settings: {
         optimizer: {
           enabled: true,

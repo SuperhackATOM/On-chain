@@ -15,17 +15,18 @@ module.exports = {
   contracts_directory: './contracts/ethereum',
 
   networks: {
-    zora_goerli: {  // explorer: https://testnet.explorer.zora.energy
-      provider: function () {
-        return new HDWalletProvider([privateKey], 'https://testnet.rpc.zora.energy')
-      },
-      network_id: 999,
-    },
     sepolia: {
       provider: function () {
         return new HDWalletProvider([privateKey], 'https://sepolia.infura.io/v3/cc8cc7e34bb440b19e75b2910913a25e')
       },
       network_id: 11155111,
+    },
+    optimistic_goerli: {
+      network_id: 420,
+      chain_id: 420,
+      provider: function () {
+        return new HDWalletProvider(privateKey, "https://optimism-goerli.infura.io/v3/" + infuraKey, 0, 1);
+      }
     },
     development: {
       host: '127.0.0.1',
@@ -35,7 +36,7 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "^0.8.19"
+      version: "^0.8.9"
     }
   }
 }
