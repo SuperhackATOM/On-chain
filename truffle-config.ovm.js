@@ -1,17 +1,9 @@
-// create a file at the root of your project and name it .env -- there you can set process variables
-// like the mnemomic below. Note: .env is ignored by git in this project to keep your private information safe
 require('dotenv').config();
-const ganacheMnemonic = process.env["GANACHE_MNEMONIC"];
-const goerliMnemonic = process.env["GOERLI_MNEMONIC"];
-const mnemonic = 'test test test test test test test test test test test junk' // process.env["MNEMONIC"];
+require('babel-register')
 
 const infuraKey = process.env["INFURA_KEY"];
-
-//uncomment to use mainnetMnemonic, be sure to set it in the .env file
-//const mainnetMnemonic = process.env["MAINNET_MNEMONIC"]
-
-const { ganache } = require('@eth-optimism/plugins/ganache');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
+const privateKey = process.env.WALLET_PRIVATE_KEY;
 
 module.exports = {
 
@@ -26,13 +18,6 @@ module.exports = {
   contracts_directory: './contracts/optimism',
 
   networks: {
-    // development: {
-    //   host: "127.0.0.1",     // Localhost (default: none)
-    //   port: 8545,            // Standard Ethereum port (default: none)
-    //   network_id: "*"       // Any network (default: none)
-    // },
-    // for use with local environment -- see README and list of available
-    // scripts in package.json for steps to get this running on your local machine
     optimistic_ethereum: {
       network_id: 17,
       provider: function () {
@@ -51,16 +36,7 @@ module.exports = {
       network_id: 420,
       chain_id: 420,
       provider: function () {
-        return new HDWalletProvider(goerliMnemonic, "https://optimism-goerli.infura.io/v3/" + infuraKey, 0, 1);
-      }
-    },
-    // requires a mainnet mnemonic; you can save this in .env or in whatever secure location
-    // you wish to use
-    optimistic_mainnet: {
-      network_id: 10,
-      chain_id: 10,
-      provider: function () {
-        return new HDWalletProvider(mainnetMnemonic, "https://optimism-mainnet.infura.io/v3/" + infuraKey, 0, 1);
+        return new HDWalletProvider(privateKey, "https://optimism-goerli.infura.io/v3/" + infuraKey, 0, 1);
       }
     },
     dashboard: {
@@ -75,7 +51,7 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "0.8.13",
+      version: "^0.8.19",
       settings: {
         optimizer: {
           enabled: true,
