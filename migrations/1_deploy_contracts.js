@@ -1,6 +1,6 @@
 
-var SimpleStorage = artifacts.require("SimpleStorage");
+var Basic = artifacts.require("ERC1155Basic");
 
 module.exports = function(deployer) {
-  deployer.deploy(SimpleStorage);
+  deployer.deploy(Basic);
 };
