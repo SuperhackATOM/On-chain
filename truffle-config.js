@@ -17,7 +17,7 @@ module.exports = {
   networks: {
     sepolia: {
       provider: function () {
-        return new HDWalletProvider([privateKey], 'https://sepolia.infura.io/v3/cc8cc7e34bb440b19e75b2910913a25e')
+        return new HDWalletProvider([privateKey], 'https://sepolia.infura.io/v3/' + infuraKey)
       },
       network_id: 11155111,
     },
