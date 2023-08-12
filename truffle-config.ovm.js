@@ -1,5 +1,4 @@
 require('dotenv').config();
-require('babel-register')
 
 const infuraKey = process.env["INFURA_KEY"];
 const HDWalletProvider = require('@truffle/hdwallet-provider');
