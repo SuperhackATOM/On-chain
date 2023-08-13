@@ -67,7 +67,7 @@ async function main(network){
     //console.log(mint_tx)
     const balance = await balanceOf(my_address, my_contract);
     console.log(balance);
-    //const change_tx =  changeOwner(jaden_address, my_contract);
+    const change_tx =  changeOwner(jaden_address, my_contract);
 }
 
 main("zora");
