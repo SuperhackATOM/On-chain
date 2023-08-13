@@ -6,7 +6,7 @@ loadEnv();
 
 const PRIVATE_KEY = process.env.WALLET_PRIVATE_KEY;
 const ABI_FILE_PATH = './ABI/ATOM.json'
-const OP_CONTRACT_ADDRESS = "";
+const OP_CONTRACT_ADDRESS = "0x331e7DfD2699b5199DfC797e2232E78Cc05dfF76";
 const BASE_CONTRACT_ADDRESS = "";
 const ZORA_CONTRACT_ADDRESS = "";
 const my_address = "0x6f9e2777D267FAe69b0C5A24a402D14DA1fBcaA1";
@@ -19,6 +19,23 @@ async function getAbi(){
     const abi = JSON.parse(data)['abi'];
     //console.log(abi);
     return abi;
+}
+
+async function mintATOM(userAddresses, contract) {  // array 
+    let id = 0; // _id
+    const mint_tx = await contract.mintATOM(userAddresses, id, '0x0102');  // second argumnent is id
+    return mint_tx;
+}
+
+async function changeOwner(newOwner, contract) {  // address (string)
+    const tx = await contract.transferOwnership(newOwner);  // second argumnent is id
+    return tx;
+}
+
+async function balanceOf(account, contract){
+    let id = 0; // _id
+    const tx = await contract.balanceOf(account, id);  // second argumnent is id
+    return tx;
 }
 
 const abi = await getAbi();
@@ -46,9 +63,12 @@ async function main(network){
     const signer = new ethers.Wallet(PRIVATE_KEY, provider);
     const my_contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
 
-    let id = 0; // _id
-    const mint_tx = await my_contract.mintATOM(userAddress, id, 1, '0x0102');  // second argumnent is id
-    return mint_tx;
+    //const mint_tx = await mintATOM([my_address,jaden_address], my_contract);
+    const balance = await balanceOf(my_address, my_contract);
+    console.log(balance);
+    //const change_tx =  changeOwner(jaden_address, my_contract);
 }
+
+main("op");
 
 
