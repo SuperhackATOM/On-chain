@@ -7,10 +7,10 @@ loadEnv();
 const PRIVATE_KEY = process.env.WALLET_PRIVATE_KEY;
 const ABI_FILE_PATH = './ABI/ATOM.json'
 const OP_CONTRACT_ADDRESS = "0x331e7DfD2699b5199DfC797e2232E78Cc05dfF76";
-const BASE_CONTRACT_ADDRESS = "";
-const ZORA_CONTRACT_ADDRESS = "";
+const BASE_CONTRACT_ADDRESS = "0x2BbCDdD17B209dC70493807F62a46a6F3F261072";
+const ZORA_CONTRACT_ADDRESS = "0x2BbCDdD17B209dC70493807F62a46a6F3F261072";
 const my_address = "0x6f9e2777D267FAe69b0C5A24a402D14DA1fBcaA1";
-const jaden_address = "0xb2d1BAa5fD0Ba77a6060D2D494a82EC025dA82EF";
+const jaden_address = "0xF7423cF85d8FD5944c4BB29c99844bB1995B7Bb3";
 const infuraKey = process.env["INFURA_API_KEY"];
 
 
@@ -64,11 +64,12 @@ async function main(network){
     const my_contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
 
     //const mint_tx = await mintATOM([my_address,jaden_address], my_contract);
+    //console.log(mint_tx)
     const balance = await balanceOf(my_address, my_contract);
     console.log(balance);
     //const change_tx =  changeOwner(jaden_address, my_contract);
 }
 
-main("op");
+main("zora");
 
 

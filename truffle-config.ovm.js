@@ -29,6 +29,7 @@ module.exports = {
         return new HDWalletProvider([privateKey], 'https://goerli.base.org')
       },
       network_id: 84531,
+      chain_id: 84531
     },
     optimistic_goerli: {
       network_id: 420,
