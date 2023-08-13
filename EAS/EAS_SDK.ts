@@ -2,7 +2,7 @@ import { EAS, Offchain, SchemaEncoder, SchemaRegistry } from "@ethereum-attestat
 import { ethers } from 'ethers';
 import { load } from 'ts-dotenv';
 //import { useWalletClient } from 'wagmi';
-import { SCHEMAS } from './EAS/Schema';
+import { SCHEMAS } from './Schema';
 
 
 const env = load({

@@ -1,50 +1,36 @@
-## Setup
-## Optimistic Ethereum
+# ATestation Of Meet
 
-### Compiling
+Custom schemas and contracts were created and deployed on 3 chains: Optimism Goerli, Zora Goerli and Base Goerli.
 
-To compile your code for Optimistic Ethereum, run the following in your terminal:
+## Schemas
+- Optimism Goerli: https://optimism-goerli-bedrock.easscan.org/schema/view/0x22cc8bd78942a630e45ac11521b9d126675b9e1958c5a269cdbda9c2749dd872
 
-```
-npm run compile:ovm
-```
+- Base Goerli: https://base-goerli.easscan.org/schema/view/0x22cc8bd78942a630e45ac11521b9d126675b9e1958c5a269cdbda9c2749dd872
 
-This script lets Truffle know to use the `truffle-config.ovm.js` configuration file, which references the directory in which we'll save your compiled contracts. When adding new contracts to compile, you may find some discrepancies and errors, so please remember to keep an eye on [differences between solc and optimistic solc](https://github.com/ethereum-optimism/solidity/compare/27d51765c0623c9f6aef7c00214e9fe705c331b1...develop-0.6)!
+- Sepolia: https://sepolia.easscan.org/schema/view/0x22cc8bd78942a630e45ac11521b9d126675b9e1958c5a269cdbda9c2749dd872
 
-If you would like to recompile previously compiled contracts, you can manually run this command with `truffle compile --config truffle-config.ovm.js` and add the `--all` flag.
+## Contracts 
+- Optimism Goerli: https://goerli-optimism.etherscan.io/address/0x331e7DfD2699b5199DfC797e2232E78Cc05dfF76
 
-### Migrating
+- Base Goerli: https://testnet.explorer.zora.energy/address/0x2BbCDdD17B209dC70493807F62a46a6F3F261072
 
-To migrate on an Optimistic Layer 2, run:
+- Zora Goerli: https://testnet.explorer.zora.energy/address/0x2BbCDdD17B209dC70493807F62a46a6F3F261072
 
-```
-npm run migrate:ovm --network=(ganache | optimistic_ethereum | optimistic_goerli | dashboard)
-```
+### The repository contains contracts, deployment scripts, ABI, methods for contract manipulation, EAS GraphQL API calls and EAS SDK scripts.
 
-(remember to choose a network from these options!).
+### Structure
 
-You have several Optimistic Layer 2 networks to choose from, prepackaged in this box (note: Layer 1 networks associated with Optimism are included in the regular `truffle-config.js` file, to aid you with further development. But here we'll just go through the Layer 2 deployment options available):
+- ABI folder contains ATOM contract ABI
 
-- `optimistic_ethereum`: This network is the default Layer 1/Layer 2 integration provided by Optimism for testing your Optimistic Ethereum code. Documentation about this setup can be found [here](https://github.com/ethereum-optimism/optimism).
-  * You will need to install the code for this network in this box in order to use the scripts associated with it. To install it, run `npm run installLocalOptimism`. You should only need to run this initiation command once. It will create an `optimism` directory in this project that will house the repository you need. If at any point you want to update to the latest optimism docker image, you can delete your `optimism` directory and run this command again.
-  * If you wish to use this network, be sure to run `npm run startLocalOptimism` so that the optimism test ecosystem docker image can be served. For our purposes, you should be able to compile, migrate, and test against this network once the docker image is fully running. See [documentation and updates](https://github.com/ethereum-optimism/optimism/tree/develop/ops) about this docker container for additional information.
-  * Please note, after running `npm run startLocalOptimism` it can take several minutes for the test ecosystem to be up and running on your local machine. The first time you run this command, it will take a bit longer for everything to be set up. Future runs will be quicker!
-  * To stop the local docker container, use `npm run stopLocalOptimism` in a new terminal tab to ensure graceful shutdown.
-- `ganache`: This network uses an optimistic ganache instance for migrations. The usage is essentially identical to use of regular ganache. *Note:* This optimistic ganache instance is no longer actively maintained. We recommend using `optimistic_ethereum` for local testing. Stay tuned for additional ganache resources in the future!
-- `optimistic_goerli`: Optimism has deployed a testnet to the Goerli network. The RPC endpoint is https://optimism-goerli.infura.io/v3/. In order to access this node for testing, you will need to connect a wallet (we suggest [MetaMask](https://metamask.io/)). Save your seed phrase in a `.env` file as `GOERLI_MNEMONIC`. Using an `.env` file for the mnemonic is safer practice because it is listed in `.gitignore` and thus will not be committed.
-  * You will need Goerli ETH in an Optimistic Goerli wallet to deploy contracts using this network. In order to deploy to Optimistic Goerli, you will need to acquire Optimistic Goerli ETH. As of this writing, there is not an Optimistic Goerli ETH faucet. In order to get Optimistic Goerli ETH, follow these steps:
-    1) Acquire ETH for your Goerli wallet on MetaMask using a [Goerli faucet](https://faucet.paradigm.xyz/).
-    2) Optimism's gateway still doesn't support Goerli, but if you transfer Goerli ETH to [0x636Af16bf2f682dD3109e60102b8E1A089FedAa8](https://goerli.etherscan.io/address/0x636Af16bf2f682dD3109e60102b8E1A089FedAa8) (opens new window), you will get it on Optimistic Goerli.
+- Migrations folder contains deployment scripts
 
-  _Note: You may get an error about the block limit being exceeded. The Truffle team is working on this issue, but in the meantime you can add this line before the deployment in your `migrations/1_deploy_contracts.js` file: `SimpleStorage.gasMultiplier = 0.9;`_
+- Contracts folder contains Optimism compatible contracts
 
-Layer 1 networks are included in the `truffle-config.js` file, but it is not necessary to deploy your base contracts to Layer 1 right now. Eventually, you will likely have a Layer 2 contract that you want to connect with a Layer 1 contract (they do not have to be identical!). One example is an ERC20 contract that is deployed on an Optimistic Ethereum network. At some point the user will wish to withdraw their funds into Ethereum. There will need to be a contract deployed on Layer 1 that can receive the message from Layer 2 to mint the appropriate tokens on Layer 1 for the user. More information on this system can be found [here](http://community.optimism.io/docs/developers/integration.html#bridging-l1-and-l2).
-
-If you would like to migrate previously migrated contracts on the same network, you can run `truffle migrate --config truffle-config.ovm.js --network=(ganache | optimistic_ethereum | optimistic_goerli | dashboard)` and add the `--reset` flag.
+- EAS folder has scripts to create attestations and retrieve data about them from EAS
 
 ## Basic Commands
 
-The code here will allow you to compile, migrate, and test your code against an Optimistic Ethereum instance. The following commands can be run (more details on each can be found in the next section):
+The following commands can be run:
 
  To compile:
  ```
@@ -65,32 +51,3 @@ The code here will allow you to compile, migrate, and test your code against an 
  ```
  npm run exec:ovm script --network=(ganache | optimistic_ethereum | optimistic_goerli | dashboard)
  ```
-Using `truffle exec` gives your script access to the instance of web3 you have running, via `web3`, and also includes your contracts as global objects when executing the script. For more information on this command, see [here](https://trufflesuite.com/docs/truffle/reference/truffle-commands/#exec).  
-
-### Testing
-
-Currently, this box supports testing via Javascript/TypeScript tests. In order to run the test currently in the boilerplate, use the following command:
-
-```
-npm run test:ovm --network=(ganache | optimistic_ethereum | optimistic_goerli | dashboard)
-```
-
-Remember that there are some differences between the EVM and the OVM, and refer to the Optimism documentation if you run into test failures.
-
-### Running Scripts
-
-You can write scripts that have access to your Truffle configuration and a web3 instance that is connected to the network indicated using `truffle exec` using the following command:
-
-```
-npm run exec:ovm script --network=(ganache | optimistic_ethereum | optimistic_goerli | dashboard)
-```
-
-Remember that there are some differences between the EVM and the OVM, and refer to the Optimism documentation if you run into failures.
-
-### Communication Between Ethereum and Optimism Chains
-
-The information above should allow you to deploy to the Optimism Layer 2 chain. This is only the first step! Once you are ready to deploy your own contracts to function on Layer 1 using Layer 2, you will need to be aware of the [ways in which Layer 1 and Layer 2 interact in the Optimism ecosystem](https://community.optimism.io/docs/developers/bridge/messaging). We have an [Optimism Bridge Box](https://trufflesuite.com/blog/introducing-the-optimism-bridge-truffle-box/?utm_source=github&utm_medium=devcommunity&utm_campaign=2022_Jul_optimism-box-readme_tutorial_content) that shows you just how to do that!
-
-## Support
-
-Support for this box is available via the Truffle community available [here](https://www.trufflesuite.com/community).
