@@ -1,7 +1,7 @@
 import { EAS, Offchain, SchemaEncoder, SchemaRegistry } from "@ethereum-attestation-service/eas-sdk";
 import { ethers } from 'ethers';
 import { load } from 'ts-dotenv';
-import { useWalletClient } from 'wagmi';
+//import { useWalletClient } from 'wagmi';
 import { SCHEMAS } from './EAS/Schema';
 
 
@@ -38,7 +38,7 @@ const eas = new EAS(OPEASContractAddress);
 const zoraProvider = ethers.getDefaultProvider('https://testnet.rpc.zora.energy');
 const opProvider = ethers.getDefaultProvider("https://optimism-goerli.infura.io/v3/" + infuraKey);
 const baseProvider = ethers.getDefaultProvider("https://goerli.base.org");
-const {data: wagmiSigner} = useWalletClient();
+//const {data: wagmiSigner} = useWalletClient();
 const signer = new ethers.Wallet(PRIVATE_KEY, opProvider);
 // Connects an ethers style provider/signingProvider to perform read/write functions.
 // MUST be a signer to do write operations!
@@ -46,7 +46,7 @@ eas.connect(signer as any);
 
 const location = "Seoul";
 const context = "ETHSEOUL Hackathon";
-const schemaEncoder = new SchemaEncoder("bool ATestationOfMeet");
+const schemaEncoder = new SchemaEncoder("bool ATestationOfMeet, string location, string context");
 const encoded_data = schemaEncoder.encodeData([
     { name: "ATestationOfMeet", type: 'bool', value: true },
     { name: "location", type: "string", value: location }, 
@@ -63,3 +63,5 @@ const tx = eas.attest({
     },
     schema: SCHEMAS.ATOM_SCHEMA
 })
+
+console.log(tx)

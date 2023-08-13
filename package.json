@@ -35,6 +35,7 @@
   "dependencies": {
     "@ethereum-attestation-service/eas-sdk": "^1.0.0-beta.0",
     "@openzeppelin/contracts": "^4.9.3",
+    "node-fetch": "^2.6.1",
     "truffle": "^5.11.2",
     "truffle-plugin-verify": "^0.6.5",
     "ts-dotenv": "^0.9.1",
