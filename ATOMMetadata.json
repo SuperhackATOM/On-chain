@@ -1,0 +1,18 @@
+{
+    "name": "ATestation Of Meet",
+    "description": "Confirmes the fact of meeting IRL",
+    "image": null,
+    "properties": {
+      "subjects": ["cryptosmiff.eth", "0x6f9e2777D267FAe69b0C5A24a402D14DA1fBcaA1"],
+      "location": "Seoul, Lotte Tower",
+      "context": "ETHSeoul2023 Hackathon",
+      "authors": [
+        {
+          "name": "Cosmodude"
+        }
+      ],
+      "content": {
+        "text/markdown": "Attests that mentioned identities met each other in real life and both confirmed it on-chain."
+      }
+    }
+  }
