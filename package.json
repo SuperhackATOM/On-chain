@@ -37,6 +37,7 @@
     "@openzeppelin/contracts": "^4.9.3",
     "truffle": "^5.11.2",
     "truffle-plugin-verify": "^0.6.5",
+    "ts-dotenv": "^0.9.1",
     "ts-node": "^10.9.1"
   }
 }
