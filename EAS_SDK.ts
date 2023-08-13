@@ -21,10 +21,9 @@ const eas = new EAS(EASContractAddress);
 // Gets a default provider (in production use something else like infura/alchemy)
 const provider = ethers.getDefaultProvider(
     network, 
-    {
-    infura: infuraKey,
-    });
+    { infura: infuraKey }
+);
 
 // Connects an ethers style provider/signingProvider to perform read/write functions.
 // MUST be a signer to do write operations!
-eas.connect(provider);
+eas.connect(provider as any);
