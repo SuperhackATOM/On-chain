@@ -12,6 +12,7 @@ baseClient
             attestations(where: $where) {
             recipient
             schemaId
+            time
             }
         }
         `,
@@ -41,6 +42,7 @@ sepoliaClient
             attestations(where: $where) {
             recipient
             schemaId
+            time
             }
         }
         `,
@@ -70,6 +72,7 @@ optimismClient
             attestations(where: $where) {
             recipient
             schemaId
+            time
             }
         }
         `,
