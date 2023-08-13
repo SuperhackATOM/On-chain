@@ -2,6 +2,7 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 require('dotenv').config();
 const infuraKey = process.env["INFURA_API_KEY"];
 const privateKey = process.env.WALLET_PRIVATE_KEY;
+const etherscanAPIKey = process.env.ETHERSCAN_PRIVATE_KEY;
 
 module.exports = {
   /**
@@ -38,5 +39,9 @@ module.exports = {
     solc: {
       version: "^0.8.9"
     }
-  }
+  },
+  plugins: ['truffle-plugin-verify'],
+  api_keys: {
+    etherscan: etherscanAPIKey,
+  },
 }
