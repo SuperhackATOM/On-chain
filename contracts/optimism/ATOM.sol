@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 
 contract ATOM is ERC1155, Ownable, Pausable {
-    constructor() ERC1155("") {}
+    constructor() ERC1155("https://github.com/SuperhackATOM/On-chain/blob/main/ATOMMetadata.json") {}
 
     function setURI(string memory newuri) public onlyOwner {
         _setURI(newuri);
